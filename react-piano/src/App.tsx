@@ -1,14 +1,17 @@
-import React from 'react';
-import { Footer } from './component/Footer';
-import { Logo } from './component/Logo';
-import styles from './App.module.css';
+import React from "react";
+import { Footer } from "./components/Footer";
+import { Logo } from "./components/Logo";
+import styles from "./App.module.css";
+import { Main } from "./components/Main";
 
-export const App() {
+export const App = () => {
   return (
     <div className={styles.app}>
-		<Logo />
-		<main className={styles.content} />
-		<Footer />
-	</div>
+      <Logo />
+      <main className={styles.content}>
+        <Main />
+      </main>
+      <Footer />
+    </div>
   );
-}
+};

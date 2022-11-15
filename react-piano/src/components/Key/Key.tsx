@@ -1,21 +1,30 @@
-// • type, a NoteType - will be used to define the styles of a key
-// • label, a string - a letter that will be placed as a label of a key
-// • disabled, an optional boolean - if true it will disable the key from being pressed
+import { FunctionComponent } from "react"
+import clsx from "clsx"
+import { NoteType } from "../../domain/note"
+import { usePressObserver } from "../PressObserver"
+import styles from "./Key.module.css"
+
+type PressCallBack = () => void
+
 type KeyProps = {
 	type: NoteType
 	label: string
 	disabled?: boolean
+	
+	onUp: PressCallBack
+	onDown: PressCallBack
 }
 
-export const Key: FunctionComponent<KeyProps> = (props) => {
-	const { type, label, ...rest } = props;
+export const Key: FunctionComponent<KeyProps> = ({type,label,onDown,onUp,...rest}) => {
+	const pressed = usePressObserver({ watchKey: label, onStartPress: onDown, onFinishPress: onUp })
 	
 	return (
 		<button 
-			className={clsx(styles.key, styles[type])} 
+			className={clsx(styles.key, styles[type], pressed && 'is-pressed')} 
 			type="button"
-			{...rest}
-			>
+			onMouseDown={onDown}
+			onMouseUp={onUp}
+			{...rest}>
 			{label}
 		</button>
 	)

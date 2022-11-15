@@ -1,22 +1,22 @@
-import {DragItem} from '../DragItem';
+import { DragItem } from '../DragItem';
 
 // • ADD_LIST - contains the list title.
 // • ADD_TASK - text is the task text, and listId is the reference to the list it belongs to.
 export type Action = 
-	| { type: "ADD_LIST", payload: string } 
+	| { type: "ADD_LIST", payload: string }
 	| { type: "ADD_TASK", payload: { text: string; listId: string } }
 	| { type: "MOVE_LIST", payload: { draggedId: string; hoverId: string } }
 	| { type: "SET_DRAGGED_ITEM", payload: DragItem | null }
-	| { 
-		type: "MOVE_TASK", 
+	| {
+		type: "MOVE_TASK",
 		payload: {
 			draggedItemId: string,
 			hoveredItemId: string | null,
 			sourceColumnId: string,
 			targetColumnId: string,
 		}
-	  }
-	
+	}
+
 interface AddListAction {
 	type: "ADD_LIST"
 	payload: string
@@ -31,7 +31,6 @@ interface MoveListAction {
 	type: "MOVE_LIST"
 	payload: { draggedId: string; hoverId: string }
 }
-
 
 interface DragItemAction {
 	type: "SET_DRAGGED_ITEM"
@@ -50,7 +49,7 @@ interface MoveTaskAction {
 
 type TAction = AddListAction | AddTaskAction | MoveListAction | DragItemAction | MoveTaskAction;
 
-export const addTask = (text: string, listId: string) : TAction => ({
+export const addTask = (text: string, listId: string): TAction => ({
 	type: "ADD_TASK",
 	payload: {
 		text,
@@ -58,12 +57,12 @@ export const addTask = (text: string, listId: string) : TAction => ({
 	}
 })
 
-export const addList = (text: string) : TAction => ({
+export const addList = (text: string): TAction => ({
 	type: "ADD_LIST",
 	payload: text
 })
 
-export const moveList = (draggedId: string, hoverId: string) : TAction => ({
+export const moveList = (draggedId: string, hoverId: string): TAction => ({
 	type: "MOVE_LIST",
 	payload: {
 		draggedId,
@@ -71,7 +70,7 @@ export const moveList = (draggedId: string, hoverId: string) : TAction => ({
 	}
 })
 
-export const setDraggedItem = (draggedItem: DragItem | null) : TAction => ({
+export const setDraggedItem = (draggedItem: DragItem | null): TAction => ({
 	type: "SET_DRAGGED_ITEM",
 	payload: draggedItem
 })
@@ -81,7 +80,7 @@ export const moveTask = (
 	hoveredItemId: string | null,
 	sourceColumnId: string,
 	targetColumnId: string
-) : TAction => ({
+): TAction => ({
 	type: "MOVE_TASK",
 	payload: {
 		draggedItemId,
@@ -90,14 +89,3 @@ export const moveTask = (
 		targetColumnId,
 	}
 })
-
-
-
-
-
-
-
-
-
-
-
